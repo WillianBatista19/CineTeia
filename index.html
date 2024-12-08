@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineTeia - Nosso Grupo de Cinema</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+        }
+        .movie-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .movie-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-white mb-4">CineTeia</h1>
+            <p class="text-xl text-gray-400">Nosso encontro de cinema toda semana, pontualmente às 18:30</p>
+        </header>
+
+        <section id="featured-movie" class="mb-16">
+            <h2 class="text-3xl font-semibold mb-6">Último Filme</h2>
+            <div class="bg-gray-800 rounded-lg p-6 flex flex-col lg:flex-row items-center justify-between shadow-xl">
+                <div class="flex flex-col md:flex-row items-center lg:w-3/5">
+                    <img id="featured-poster" src="" alt="Poster do Filme" class="w-64 h-96 object-cover rounded-lg mb-6 md:mb-0 md:mr-8">
+                    <div class="md:w-2/3">
+                        <h3 id="featured-title" class="text-2xl font-bold mb-4"></h3>
+                        <p id="featured-synopsis" class="text-gray-300 mb-6 max-w-prose line-clamp-4"></p>
+                        <button onclick="openMovieDetails()" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                            Ver Opiniões
+                        </button>
+                    </div>
+                </div>
+                <div id="next-movie" class="hidden lg:flex flex-col items-center bg-gray-700 p-4 rounded-lg shadow-lg lg:w-1/3">
+                    <h3 class="text-xl font-semibold mb-4">Próximo Filme</h3>
+                    <img id="next-movie-poster" src="" alt="Poster do Próximo Filme" class="w-48 h-64 object-cover rounded-lg">
+                </div>
+            </div>
+        </section>
+
+        <section id="movie-list">
+            <h2 class="text-3xl font-semibold mb-6">Filmes Anteriores</h2>
+            <div id="movies-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+        </section>
+
+        <div id="movie-details-modal" class="fixed inset-0 bg-black bg-opacity-75 hidden flex items-center justify-center z-50 p-4">
+            <div class="bg-gray-800 p-8 rounded-lg w-full max-w-md max-h-[90vh] overflow-y-auto">
+                <h3 id="modal-movie-title" class="text-2xl font-bold mb-4"></h3>
+                <div id="modal-movie-reviews" class="text-gray-300"></div>
+                <button onclick="closeMovieDetails()" class="mt-6 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full">
+                    Fechar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const movies = [
+            {
+                title: "Vidas Passadas",
+                poster: "https://a.ltrbxd.com/resized/film-poster/5/9/1/0/5/3/591053-past-lives-0-1000-0-1500-crop.jpg?v=c600b7854e",
+                synopsis: "Duas almas conectadas se encontram após anos separadas, explorando o destino, o amor e as possibilidades de uma vida compartilhada. Nora e Hae Sung, duas amigas de infância profundamente conectadas, se separam depois de uma mudança. Duas décadas depois, elas se reencontram na cidade de Nova York para uma semana fatídica enquanto confrontam noções de destino, amor e escolhas.",
+                reviews: [
+                    { name: "Alextheboy", rating: 4, comment: "Achei massa toda a reflexão sobre encontros e desencontros, é um filme forte, porém impossível não rir com as pesadas de clima" },
+                    { name: "MarioCoellho", rating: 4, comment: "Que tristeza meu Deus, paia deixar o uber esperando." },
+                    { name: "NatalNaLua", rating: 4, comment: "As vezes, as pessoas que mais amamos não estão destinadas a ficar, mas a nos transformar enquanto passam por nossas vidas. Que filme bom..." }
+                ]
+            },
+            {
+                title: "Dois Papas",
+                poster: "https://a.ltrbxd.com/resized/film-poster/4/8/0/0/9/9/480099-the-two-popes-0-1000-0-1500-crop.jpg?v=b9d6e67718",
+                synopsis: "O cardeal argentino Jorge Bergoglio está decidido a pedir sua aposentadoria, devido a divergências sobre a forma como o papa Bento XVI tem conduzido a Igreja. Com a passagem já comprada para Roma, ele é surpreendido com o convite do próprio papa para visitá-lo. Juntos, eles precisam superar suas diferenças e construir um novo caminho para a Igreja Católica.",
+                reviews: [
+                ]
+            },
+            {
+                title: "Estranho Caminho",
+                poster: "https://a.ltrbxd.com/resized/film-poster/9/2/4/2/3/3/924233-a-strange-path-0-1000-0-1500-crop.jpg?v=f4871f167e",
+                synopsis: "Um jovem cineasta que visita sua cidade natal é surpreendido pelo rápido avanço da pandemia e precisa encontrar seu pai, com quem não fala há mais de dez anos. Depois do primeiro encontro, coisas estranhas começam a acontecer.",
+                reviews: [
+                    { name: "Alextheboy", rating: 4, comment: "Capistrano espirrou muito bem" },
+                    { name: "Pedroedson", rating: 4, comment: "Primeiros frames: Absolute Cinema" },
+                    { name: "MarioCoellho", rating: 4, comment: "Um estranho caminho de fato, porém um caminho que constrói um ótimo filme." },
+                    { name: "NatalNaLua", rating: 4, comment: "Bom demais, melhor que aquele pássaro despenado! Cinema!!!" }
+                ]
+            },
+            {
+                title: "Lady Cu",
+                poster: "https://a.ltrbxd.com/resized/film-poster/3/2/6/2/7/9/326279-lady-bird-0-1000-0-1500-crop.jpg?v=754ff28eb4",
+                synopsis: "Lady Bird McPherson, a strong willed, deeply opinionated, artistic 17 year old comes of age in Sacramento. Her relationship with her mother and her upbringing are questioned and tested as she plans to head off to college.",
+                reviews: [
+                    { name: "Alextheboy", rating: 2, comment: "Única parte boa é que tem uma revista com o vampeta na capa" },
+                    { name: "Pedroedson", rating: 2.5, comment: "Nada a declarar" },
+                    { name: "MarioCoellho", rating: 1, comment: "O vampeta nu tentou salvar o filme, mas não conseguiu" },
+                    { name: "NatalNaLua", rating: 0.5, comment: "E com isso, percebi que ser indicado ao Oscar, não significa poha nenhuma." }
+                ]
+            },
+            {
+                title: "Ran",
+                poster: "https://a.ltrbxd.com/resized/sm/upload/h6/yo/p7/1t/ran-0-1000-0-1500-crop.jpg?v=3cabb176dc",
+                synopsis: "With Ran, legendary director Akira Kurosawa reimagines Shakespeare’s King Lear as a singular historical epic set in sixteenth-century Japan. Majestic in scope, the film is Kurosawa’s late-life masterpiece, a profound examination of the folly of war and the crumbling of one family under the weight of betrayal, greed, and the insatiable thirst for power.",
+                reviews: [
+                    { name: "Alextheboy", rating: 0, comment: "Sem comentário" },
+                    { name: "MarioCoellho", rating: 0, comment: "Sem comentário" },
+                    { name: "NatalNaLua", rating: 5, comment: "CINEMA, APENAS!!!" }
+                ]
+            },
+            {
+                title: "Psycho",
+                poster: "https://a.ltrbxd.com/resized/film-poster/5/1/5/7/8/51578-psycho-0-1000-0-1500-crop.jpg?v=7250c49dcd",
+                synopsis: "When larcenous real estate clerk Marion Crane goes on the lam with a wad of cash and hopes of starting a new life, she ends up at the notorious Bates Motel, where manager Norman Bates cares for his housebound mother.",
+                reviews: [
+                    { name: "Alextheboy", rating: 0, comment: "Sem comentário" },
+                    { name: "Pedroedson", rating: 3.5, comment: "Sem comentário" },
+                    { name: "MarioCoellho", rating: 0, comment: "Sem comentário" },
+                    { name: "NatalNaLua", rating: 3.5, comment: "Bom, mas o povo é muito burro, mds. O plot salva!" }
+                ]
+            },
+            {
+                title: "The Substance",
+                poster: "https://a.ltrbxd.com/resized/film-poster/8/3/8/1/4/0/838140-the-substance-0-1000-0-1500-crop.jpg?v=ab9e1072f8",
+                synopsis: "A fading celebrity decides to use a black market drug, a cell-replicating substance that temporarily creates a younger, better version of herself.",
+                reviews: [
+                    { name: "Alextheboy", rating: 0, comment: "Sem comentário" },
+                    { name: "Pedroedson", rating: 4, comment: "Sem comentário" },
+                    { name: "MarioCoellho", rating: 0, comment: "Sem comentário" },
+                    { name: "NatalNaLua", rating: 3, comment: "Começou muito bom e terminou terrível, mas muito bom, recomendo!" }
+                ]
+            },
+            {
+                title: "La Haine",
+                poster: "https://a.ltrbxd.com/resized/film-poster/5/1/6/8/4/51684-la-haine-0-1000-0-1500-crop.jpg?v=b6677cc136",
+                synopsis: "After a chaotic night of rioting in a marginal suburb of Paris, three young friends, Vinz, Hubert and Saïd, wander around unoccupied waiting for news about the state of health of a mutual friend who has been seriously injured when confronting the police.",
+                reviews: [
+                    { name: "MarioCoellho", rating: 0, comment: "Sem comentário" },
+                    { name: "NatalNaLua", rating: 2.5, comment: "O final é insano!!" }
+                ]
+            },
+            {
+                title: "The Life Aquatic with Steve Zissou",
+                poster: "https://a.ltrbxd.com/resized/sm/upload/lj/js/4a/zc/the-life-aquatic-with-steve-zissou-original-0-1000-0-1500-crop.jpg?v=c206023bc2",
+                synopsis: "Renowned oceanographer Steve Zissou has sworn vengeance upon the rare shark that devoured a member of his crew. In addition to his regular team, he is joined on his boat by Ned, a man who believes Zissou to be his father, and Jane, a journalist pregnant by a married man. They travel the sea, all too often running into pirates and, perhaps more traumatically, various figures from Zissou’s past, including his estranged wife, Eleanor.",
+                reviews: [
+                    { name: "MarioCoellho", rating: 0, comment: "Sem comentário" },
+                    { name: "NatalNaLua", rating: 4, comment: "Sem comentário" }
+                ]
+            },
+            {
+                title: "Drive My Car",
+                poster: "https://a.ltrbxd.com/resized/film-poster/6/7/9/2/9/1/679291-drive-my-car-0-1000-0-1500-crop.jpg?v=9e1f7c9f35",
+                synopsis: "Yusuke Kafuku, a stage actor and director, still unable, after two years, to cope with the loss of his beloved wife, accepts to direct Uncle Vanya at a theater festival in Hiroshima. There he meets Misaki, an introverted young woman, appointed to drive his car. In between rides, secrets from the past and heartfelt confessions will be unveiled.",
+                reviews: [
+                    { name: "MarioCoellho", rating: 0, comment: "Sem comentário" },
+                    { name: "NatalNaLua", rating: 4.5, comment: "Filme longo, mas incrivel!" }
+                ]
+            },
+            {
+                title: "The Graduate",
+                poster: "https://a.ltrbxd.com/resized/sm/upload/64/us/cm/83/AuFvrbtWSPiBPIv9ewH2DV4nhCD-0-1000-0-1500-crop.jpg?v=4fee371b0d",
+                synopsis: "ABenjamin, a recent college graduate very worried about his future, finds himself in a love triangle with an older woman and her daughter.",
+                reviews: [
+                    { name: "MarioCoellho", rating: 0, comment: "Sem comentário" },
+                    { name: "NatalNaLua", rating: 3, comment: "Legal, doido, mas legal." }
+                ]
+            },
+            {
+                title: "The Sacrifice",
+                poster: "https://a.ltrbxd.com/resized/film-poster/3/6/6/1/8/36618-the-sacrifice-0-1000-0-1500-crop.jpg?v=abe0768e2a",
+                synopsis: "Alexander, a journalist, philosopher and retired actor, celebrates a birthday with friends and family when it is announced that nuclear war has begun.",
+                reviews: [
+                    { name: "MarioCoellho", rating: 0, comment: "Sem comentário" },
+                    { name: "NatalNaLua", rating: 4, comment: "i guess i'm dumb" }
+                ]
+            }
+        ];
+
+        const featuredMovie = movies[0];
+        document.getElementById('featured-poster').src = featuredMovie.poster;
+        document.getElementById('featured-title').textContent = featuredMovie.title;
+        document.getElementById('featured-synopsis').textContent = featuredMovie.synopsis;
+    
+        const nextMovie = movies[1];
+        document.getElementById('next-movie-poster').src = nextMovie.poster;
+    
+        const moviesGrid = document.getElementById('movies-grid');
+        movies.slice(2).forEach(movie => {
+            const movieCard = document.createElement('div');
+            movieCard.className = "movie-card bg-gray-800 rounded-lg p-4 cursor-pointer";
+            movieCard.innerHTML = `
+                <img src="${movie.poster}" alt="${movie.title}" class="w-full h-64 object-cover rounded-lg mb-4">
+                <h3 class="text-lg font-semibold">${movie.title}</h3>
+            `;
+            movieCard.onclick = function() {
+                openMovieDetails(movie);
+            };
+            moviesGrid.appendChild(movieCard);
+        });
+
+        function openMovieDetails(movie = featuredMovie) {
+            const modal = document.getElementById('movie-details-modal');
+            const titleElement = document.getElementById('modal-movie-title');
+            const reviewsElement = document.getElementById('modal-movie-reviews');
+
+            titleElement.textContent = movie.title;
+            reviewsElement.innerHTML = movie.reviews.map(review => `
+                <div class="mb-4 p-4 bg-gray-700 rounded">
+                    <div class="flex justify-between">
+                        <strong>${review.name}</strong>
+                        <span>Nota: ${review.rating}/5</span>
+                    </div>
+                    <p class="mt-2">${review.comment}</p>
+                </div>
+            `).join('');
+
+            modal.classList.remove('hidden');
+        }
+    
+        function closeMovieDetails() {
+            const modal = document.getElementById('movie-details-modal');
+            modal.classList.add('hidden');
+        }
+    </script>
+    
+</body>
+</html>
