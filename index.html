@@ -204,19 +204,34 @@
         const nextMovie = movies[1];
         document.getElementById('next-movie-poster').src = nextMovie.poster;
     
+        function calculateAverageRating(reviews) {
+        if (reviews.length === 0) return 0;
+        const validReviews = reviews.filter(review => review.rating > 0);
+        const totalRating = validReviews.reduce((sum, review) => sum + review.rating, 0);
+        return totalRating / validReviews.length;
+    }
+
         const moviesGrid = document.getElementById('movies-grid');
         movies.slice(2).forEach(movie => {
             const movieCard = document.createElement('div');
-            movieCard.className = "movie-card bg-gray-800 rounded-lg p-4 cursor-pointer";
+            movieCard.className = "movie-card bg-gray-800 rounded-lg p-4 cursor-pointer relative";
+            
+            const averageRating = calculateAverageRating(movie.reviews);
+            
             movieCard.innerHTML = `
                 <img src="${movie.poster}" alt="${movie.title}" class="w-full h-64 object-cover rounded-lg mb-4">
                 <h3 class="text-lg font-semibold">${movie.title}</h3>
+                ${averageRating >= 4 ? `
+                    <div class="absolute top-4 right-4 bg-yellow-500 text-black px-2 py-1 rounded-full text-xs font-bold">
+                        Indicado pelo CineTeia
+                    </div>
+                ` : ''}
             `;
             movieCard.onclick = function() {
                 openMovieDetails(movie);
             };
             moviesGrid.appendChild(movieCard);
-        });
+        })
 
         function openMovieDetails(movie = movies[0]) {
             const modal = document.getElementById('movie-details-modal');
