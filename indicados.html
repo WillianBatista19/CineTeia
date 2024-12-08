@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineTeia - Teia de Ouro</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+        }
+        .movie-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .movie-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <header class="text-center mb-12">
+            <h1 class="text-5xl font-bold text-yellow-400 mb-4">Teia de Ouro</h1>
+            <p class="text-xl text-gray-400">A premiação definitiva do nosso grupo de cinema</p>
+        </header>
+
+        <!-- Categorias de Premiação -->
+        <section class="mb-16">
+            <div class="bg-gray-800 rounded-lg p-8 shadow-xl">
+                <h2 class="text-3xl font-semibold mb-6 text-center text-yellow-300">Categorias de Premiação</h2>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                    <div class="bg-gray-700 p-4 rounded-lg cursor-pointer" onclick="openModal('melhor-filme')">
+                        <h3 class="text-xl font-bold text-yellow-300 mb-2">🏆 Melhor Filme</h3>
+                        <p class="text-gray-300">Teia de Ouro</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg cursor-pointer" onclick="openModal('melhor-diretor')">
+                        <h3 class="text-xl font-bold text-yellow-300 mb-2">🎬 Melhor Diretor</h3>
+                        <p class="text-gray-300">Teia de Visão</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg cursor-pointer" onclick="openModal('melhor-roteiro')">
+                        <h3 class="text-xl font-bold text-yellow-300 mb-2">✍️ Melhor Roteiro</h3>
+                        <p class="text-gray-300">Trama Perfeita</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg cursor-pointer" onclick="openModal('melhor-ator')">
+                        <h3 class="text-xl font-bold text-yellow-300 mb-2">👨 Melhor Ator</h3>
+                        <p class="text-gray-300">Vértice de Ouro</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg cursor-pointer" onclick="openModal('melhor-atriz')">
+                        <h3 class="text-xl font-bold text-yellow-300 mb-2">👩 Melhor Atriz</h3>
+                        <p class="text-gray-300">Estrela da Teia</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg cursor-pointer" onclick="openModal('ator-coadjuvante')">
+                        <h3 class="text-xl font-bold text-yellow-300 mb-2">🎭 Ator Coadjuvante</h3>
+                        <p class="text-gray-300">Fio Forte</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg cursor-pointer" onclick="openModal('atriz-coadjuvante')">
+                        <h3 class="text-xl font-bold text-yellow-300 mb-2">🎤 Atriz Coadjuvante</h3>
+                        <p class="text-gray-300">Fio Elegante</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg cursor-pointer" onclick="openModal('melhor-trilha-sonora')">
+                        <h3 class="text-xl font-bold text-yellow-300 mb-2">🎵 Melhor Trilha Sonora</h3>
+                        <p class="text-gray-300">Ritmo na Teia</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg cursor-pointer" onclick="openModal('melhor-fotografia')">
+                        <h3 class="text-xl font-bold text-yellow-300 mb-2">📷 Melhor Fotografia</h3>
+                        <p class="text-gray-300">Imagem Tecida</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg cursor-pointer" onclick="openModal('melhor-montagem')">
+                        <h3 class="text-xl font-bold text-yellow-300 mb-2">🔧 Melhor Montagem</h3>
+                        <p class="text-gray-300">Trama Rítmica</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg cursor-pointer" onclick="openModal('melhor-figurino')">
+                        <h3 class="text-xl font-bold text-yellow-300 mb-2">👗 Melhor Figurino</h3>
+                        <p class="text-gray-300">Fio do Personagem</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg cursor-pointer" onclick="openModal('melhor-design-producao')">
+                        <h3 class="text-xl font-bold text-yellow-300 mb-2">🏗️ Melhor Design de Produção</h3>
+                        <p class="text-gray-300">Teia do Mundo</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg cursor-pointer" onclick="openModal('melhor-efeito-visual')">
+                        <h3 class="text-xl font-bold text-yellow-300 mb-2">💥 Melhor Efeito Visual</h3>
+                        <p class="text-gray-300">Trama Fantástica</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg cursor-pointer" onclick="openModal('melhor-som')">
+                        <h3 class="text-xl font-bold text-yellow-300 mb-2">🔊 Melhor Som</h3>
+                        <p class="text-gray-300">Eco na Teia</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg cursor-pointer" onclick="openModal('melhor-retro')">
+                        <h3 class="text-xl font-bold text-yellow-300 mb-2">⏳ Teia Retrô</h3>
+                        <p class="text-gray-300">Teia Antiga</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg cursor-pointer" onclick="openModal('melhor-contribuicao')">
+                        <h3 class="text-xl font-bold text-yellow-300 mb-2">🏅 Reconhecimento de Contribuição Artística</h3>
+                        <p class="text-gray-300">Nó de Ouro</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg cursor-pointer" onclick="openModal('melhor-oriental')">
+                        <h3 class="text-xl font-bold text-yellow-300 mb-2">🌸 Melhor Filme Oriental</h3>
+                        <p class="text-gray-300">Horizonte de Lótus</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg cursor-pointer" onclick="openModal('parece-alex')">
+                        <h3 class="text-xl font-bold text-yellow-300 mb-2">👯‍♂️ Gêmeo Perfeito</h3>
+                        <p class="text-gray-300">Personagem que mais parece com Alex</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg cursor-pointer" onclick="openModal('poha-alex')">
+                        <h3 class="text-xl font-bold text-yellow-300 mb-2">🙈 Poha Alex, se valoriza</h3>
+                        <p class="text-gray-300">Redenção na Teia</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg cursor-pointer" onclick="openModal('rola-bosta')">
+                        <h3 class="text-xl font-bold text-yellow-300 mb-2">💩 Rola-bosta do ano</h3>
+                        <p class="text-gray-300">Trama Mal Tecida</p>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg cursor-pointer" onclick="openModal('poha-beluga')">
+                        <h3 class="text-xl font-bold text-yellow-300 mb-2">🐈 Grande Referência à Beluga</h3>
+                        <p class="text-gray-300">Poha, Beluga</p>
+                    </div>                                      
+                </div>
+            </div>
+        </section>
+
+        <!-- Prêmio Mosca de Ouro -->
+        <section class="text-center">
+            <div class="bg-gray-800 rounded-lg p-8 shadow-xl">
+                <h3 class="text-3xl font-bold text-yellow-300 mb-6">🏆 Prêmio Mosca de Ouro 🏆</h3>
+                <p class="text-xl text-gray-300 mb-4">O filme vencedor receberá o cobiçado Mosca de Ouro, o símbolo máximo de excelência cinematográfica do CineTeia!</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
+        <div class="bg-gray-800 p-8 rounded-lg max-w-lg w-full">
+            <h3 id="modal-title" class="text-3xl font-bold text-yellow-300 mb-4">Indicados</h3>
+            <ul id="modal-content" class="text-gray-300 space-y-2"></ul>
+            <button onclick="closeModal()" class="mt-4 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Fechar</button>
+        </div>
+    </div>
+
+    <script>
+        const categories = {
+            'melhor-filme': [
+                'Vidas Passadas', 'Dois Papas', 'Estranho Caminho', 'Lady Bird', 'Ran', 'Psycho', 'The Substance', 
+                'La Haine', 'The Life Aquatic with Steve Zissou', 'Drive My Car', 'The Graduate', 'The Sacrifice'
+            ],
+            'melhor-diretor': [
+                'Vidas Passadas - Celine Song', 'Dois Papas - Fernando Meirelles', 'Estranho Caminho - Guto Parente', 
+                'Lady Bird - Greta Gerwig', 'Ran - Akira Kurosawa', 'Psycho - Alfred Hitchcock', 'The Substance - Coralie Fargeat', 
+                'La Haine - Mathieu Kassovitz', 'The Life Aquatic with Steve Zissou - Wes Anderson', 'Drive My Car - Ryusuke Hamaguchi', 
+                'The Graduate - Mike Nichols', 'The Sacrifice - Andrei Tarkovsky'
+            ],
+            'melhor-roteiro': [
+                'Vidas Passadas - Celine Song', 'Dois Papas - Anthony McCarten', 'Estranho Caminho - Guto Parente', 
+                'Lady Bird - Greta Gerwig', 'Ran - Akira Kurosawa, Hideo Oguni', 'Psycho - Joseph Stefano (baseado no livro de Robert Bloch)', 
+                'The Substance - Coralie Fargeat', 'La Haine - Mathieu Kassovitz', 'The Life Aquatic with Steve Zissou - Wes Anderson, Noah Baumbach', 
+                'Drive My Car - Ryusuke Hamaguchi', 'The Graduate - Buck Henry, Calder Willingham', 'The Sacrifice - Andrei Tarkovsky'
+            ],
+            'melhor-ator': [
+                'Vidas Passadas - John Magaro (como Hae Sung)', 'Dois Papas - Jonathan Pryce (como Papa Francisco)', 'Estranho Caminho - Lucas Limeira (como David)',
+                'Ran - Tatsuya Nakadai (como Hidetora Ichimonji)', 'Psycho - Anthony Perkins (como Norman Bates)', 'La Haine - Vincent Cassel (como Vinz)',
+                'The Life Aquatic with Steve Zissou - Bill Murray (como Steve Zissou)', 'Drive My Car - Hidetoshi Nishijima (como Yusuke Kafuku)', 
+                'The Graduate - Dustin Hoffman (como Benjamin Braddock)', 'The Sacrifice - Erland Josephson (como Alexander)'
+            ],
+            'melhor-atriz': [
+                'Vidas Passadas - Greta Lee (como Nora)', 'Lady Bird - Saoirse Ronan (como Lady Bird McPherson)', 
+                'Psycho - Janet Leigh (como Marion Crane)', 'The Substance - Demi Moore (como Elisabeth)', 'The Substance - Margaret Qualley (como Sue)',
+                'The Life Aquatic with Steve Zissou - Cate Blanchett (como Jane Winslett-Richardson)', 'Drive My Car - Toko Miura (como Misaki Watari)',
+                'The Graduate - Anne Bancroft (como Mrs. Robinson)'
+            ],
+            'ator-coadjuvante': [
+                'Vidas Passadas - John Magaro (como Arthur)', 'Dois Papas - Anthony Hopkins (como Papa Bento XVI)', 'Estranho Caminho - Carlos Francisco (como Geraldo)',
+                'Lady Bird - Laurie Metcalf (como Marion McPherson)', 'Ran - Shinnosuke Ikehata (como Kyoami)', 'Psycho - John Gavin (como Sam)',
+                'La Haine - Hubert Koundé (como Hubert)', 'The Life Aquatic with Steve Zissou - Owen Wilson (como Ned Plimpton)', 
+                'Drive My Car - Reika Kirishima (como Takatsuki)', 'The Graduate - Katharine Ross (como Elaine Robinson)', 'The Sacrifice - Allan Edwall (como Otto)'
+            ],
+            'atriz-coadjuvante': [
+                'Lady Bird - Beanie Feldstein (como Julie Steffans)', 'Ran - Mieko Harada (como Lady Kaede)', 'Psycho - Vera Miles (como Lila Crane)',
+                'The Life Aquatic with Steve Zissou - Cate Blanchett (como Jane Winsllet)', 'The Life Aquatic with Steve Zissou - Anjelica Huston (como Eleanor Zissou)',
+                'Drive My Car - Toko Miura (como Misaki Watari)', 'The Graduate - Katharine Ross (como Elaine Robinson)'
+            ],
+            'melhor-trilha-sonora': [
+                'Vidas Passadas', 'Dois Papas', 'Estranho Caminho', 'Lady Bird - Jon Brion', 'Ran - Toru Takemitsu', 'Psycho - Bernard Herrmann',
+                'The Substance', 'La Haine', 'The Life Aquatic with Steve Zissou - Mark Mothersbaugh', 'Drive My Car', 'The Graduate - Simon & Garfunkel', 
+                'The Sacrifice'
+            ],
+            'melhor-fotografia': [
+                'Vidas Passadas', 'Dois Papas', 'Estranho Caminho', 'Lady Bird - Sam Levy', 'Ran - Takao Saito', 'Psycho - John L. Russell',
+                'The Substance', 'La Haine - Pierre Aïm', 'The Life Aquatic with Steve Zissou - Robert Yeoman', 'Drive My Car - Hidetoshi Shinomiya',
+                'The Graduate - Robert Surtees', 'The Sacrifice - Sven Nykvist'
+            ],
+            'melhor-montagem': [
+                'Vidas Passadas', 'Dois Papas', 'Estranho Caminho', 'Lady Bird - Nick Houy', 'Ran - Akira Kurosawa', 'Psycho - George Tomasini',
+                'The Substance', 'La Haine', 'The Life Aquatic with Steve Zissou', 'Drive My Car', 'The Graduate - Sam O\'Steen', 'The Sacrifice - Andrei Tarkovsky'
+            ],
+            'melhor-figurino': [
+                'Vidas Passadas', 'Dois Papas', 'Estranho Caminho', 'Lady Bird', 'Ran', 'Psycho', 'The Substance', 'La Haine', 
+                'The Life Aquatic with Steve Zissou', 'Drive My Car', 'The Graduate', 'The Sacrifice'
+            ],
+            'melhor-design-producao': [
+                'Vidas Passadas', 'Dois Papas', 'Estranho Caminho', 'Lady Bird', 'Ran', 'Psycho', 'The Substance', 'La Haine', 
+                'The Life Aquatic with Steve Zissou', 'Drive My Car', 'The Graduate', 'The Sacrifice'
+            ],
+            'melhor-efeito-visual': [
+                'Vidas Passadas', 'Dois Papas', 'Estranho Caminho', 'Lady Bird', 'Ran', 'Psycho', 'The Substance', 'La Haine',
+                'The Life Aquatic with Steve Zissou', 'Drive My Car', 'The Graduate', 'The Sacrifice'
+            ],
+            'melhor-som': [
+                'Vidas Passadas', 'Dois Papas', 'Estranho Caminho', 'Lady Bird', 'Ran', 'Psycho', 'The Substance', 'La Haine',
+                'The Life Aquatic with Steve Zissou', 'Drive My Car', 'The Graduate', 'The Sacrifice'
+            ],
+            'melhor-retro': [
+                'Ran', 'Psycho', 'The Graduate', 'The Sacrifice'
+            ],
+            'melhor-contribuicao': [
+                'Vampeta na capa de Lady Bird', 'Capistrano'
+            ],
+            'melhor-oriental': [
+                'Vidas Passadas', 'Ran', 'Drive My Car'
+            ],
+            'parece-alex': [
+                'Vidas Passadas', 'Dois Papas', 'Estranho Caminho', 'Lady Bird', 'Ran', 'Psycho', 'The Substance', 'La Haine', 
+                'The Life Aquatic with Steve Zissou', 'Drive My Car', 'The Graduate', 'The Sacrifice'
+            ],
+            'poha-alex': [
+                'Vidas Passadas', 'Dois Papas', 'Estranho Caminho', 'Lady Bird', 'Ran', 'Psycho', 'The Substance', 'La Haine', 
+                'The Life Aquatic with Steve Zissou', 'Drive My Car', 'The Graduate', 'The Sacrifice'
+            ],
+            'rola-bosta': [
+                'Vidas Passadas', 'Dois Papas', 'Estranho Caminho', 'Lady Bird', 'Ran', 'Psycho', 'The Substance', 'La Haine',
+                'The Life Aquatic with Steve Zissou', 'Drive My Car', 'The Graduate', 'The Sacrifice'
+            ],
+            'poha-beluga': [
+                'Vidas Passadas', 'Dois Papas', 'Estranho Caminho', 'Lady Bird', 'Ran', 'Psycho', 'The Substance', 'La Haine',
+                'The Life Aquatic with Steve Zissou', 'Drive My Car', 'The Graduate', 'The Sacrifice'
+            ]
+        };
+
+        function openModal(category) {
+            const modal = document.getElementById('modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalContent = document.getElementById('modal-content');
+            
+            modalTitle.textContent = `Indicados - ${category.replace('-', ' ').toUpperCase()}`;
+            modalContent.innerHTML = categories[category].map(item => `<li>${item}</li>`).join('');
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
