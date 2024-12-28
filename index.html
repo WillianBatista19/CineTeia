@@ -35,7 +35,7 @@
                 <div id="timer" class="text-5xl font-bold text-yellow-500"></div>
             </section>
             
-            <div id="votacao-message" class="hidden mt-4 text-center">
+            <div id="votacao-message" class="hidden mt-10 text-center">
                 <p class="text-xl text-yellow-400">A votação do Teia de Ouro começou!</p>
                 <a href="indicados.html" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded mt-4 inline-block">
                     Ir para as Categorias
@@ -361,29 +361,37 @@
         }
 
         function startCountdown() {
-        const eventDate = new Date("2024-12-28T21:00:00Z");
-        const timerElement = document.getElementById("timer");
+            const eventDate = new Date("2024-12-28T21:00:00-03:00");
+            const timerElement = document.getElementById("timer");
+            const votacaoMessage = document.getElementById("votacao-message");
+            const countdownSection = document.getElementById("countdown");
 
-        function updateTimer() {
-            const now = new Date();
-            const diff = eventDate - now;
+            function checkTimeAndUpdate() {
+                const now = new Date();
+                const diff = eventDate - now;
 
-            if (diff <= 0) {
-                clearInterval(interval);
-                timerElement.textContent = "Chegou o grande momento!";
-                return;
+                if (diff <= 0) {
+                    countdownSection.classList.add('hidden'); 
+                    votacaoMessage.classList.remove('hidden'); 
+                    return true;
+                }
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                timerElement.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+                return false;
             }
 
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-            timerElement.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-        }
-
-        updateTimer(); 
-        const interval = setInterval(updateTimer, 1000);
+            if (!checkTimeAndUpdate()) {
+                const interval = setInterval(() => {
+                    if (checkTimeAndUpdate()) {
+                        clearInterval(interval);
+                    }
+                }, 1000);
+            }
         }
 
         window.onload = startCountdown;

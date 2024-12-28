@@ -118,7 +118,7 @@
                     </div>                                      
                 </div>
                 <div class="text-center mt-12">
-                    <a href="https://docs.google.com/forms/seu-formulario-aqui" 
+                    <a href="https://forms.gle/hYzQGNZyxf7X9hKD6" 
                        target="_blank" 
                        class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 px-8 rounded-full text-xl transition duration-300 ease-in-out transform hover:scale-105 inline-block">
                         Votar em Todas as Categorias
@@ -136,6 +136,10 @@
         </section>
     </div>
 
+    <div class="bg-gray-800 p-8 shadow-xl text-center">
+        <h3 class="text-3xl font-bold text-yellow-300 mb-0">🕸️ Resultados dia 04/01/2025 🕷️</h3>
+    </div>
+
     <!-- Modal -->
     <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
         <div class="bg-gray-800 p-8 rounded-lg max-w-lg w-full">
@@ -148,97 +152,96 @@
     <script>
         const categories = {
             'melhor-filme': [
-                'Vidas Passadas', 'Dois Papas', 'Estranho Caminho', 'Lady Bird', 'Ran', 'Psycho', 'The Substance', 
-                'La Haine', 'The Life Aquatic with Steve Zissou', 'Drive My Car', 'The Graduate', 'The Sacrifice'
+                'Jojo Rabbit', 'Vidas Passadas', 'Estranho Caminho', 'Ran',
+                'The Life Aquatic with Steve Zissou', 'Drive My Car','The Sacrifice'
             ],
             'melhor-diretor': [
-                'Vidas Passadas - Celine Song', 'Dois Papas - Fernando Meirelles', 'Estranho Caminho - Guto Parente', 
+                'Ringu - Hideo Nakata', 'Vidas Passadas - Celine Song', 'Estranho Caminho - Guto Parente', 
                 'Lady Bird - Greta Gerwig', 'Ran - Akira Kurosawa', 'Psycho - Alfred Hitchcock', 'The Substance - Coralie Fargeat', 
                 'La Haine - Mathieu Kassovitz', 'The Life Aquatic with Steve Zissou - Wes Anderson', 'Drive My Car - Ryusuke Hamaguchi', 
                 'The Graduate - Mike Nichols', 'The Sacrifice - Andrei Tarkovsky'
             ],
             'melhor-roteiro': [
-                'Vidas Passadas - Celine Song', 'Dois Papas - Anthony McCarten', 'Estranho Caminho - Guto Parente', 
-                'Lady Bird - Greta Gerwig', 'Ran - Akira Kurosawa, Hideo Oguni', 'Psycho - Joseph Stefano (baseado no livro de Robert Bloch)', 
-                'The Substance - Coralie Fargeat', 'La Haine - Mathieu Kassovitz', 'The Life Aquatic with Steve Zissou - Wes Anderson, Noah Baumbach', 
-                'Drive My Car - Ryusuke Hamaguchi', 'The Graduate - Buck Henry, Calder Willingham', 'The Sacrifice - Andrei Tarkovsky'
+                'Ringu - Hiroshi Takahashi', 'Vidas Passadas - Celine Song', 'Estranho Caminho - Guto Parente', 
+                'Ran - Akira Kurosawa, Hideo Oguni', 'Psycho - Joseph Stefano (baseado no livro de Robert Bloch)', 
+                'The Substance - Coralie Fargeat', 'La Haine - Mathieu Kassovitz', 'Drive My Car - Ryusuke Hamaguchi',
+                'The Graduate - Buck Henry, Calder Willingham', 'The Sacrifice - Andrei Tarkovsky'
             ],
             'melhor-ator': [
-                'Vidas Passadas - John Magaro (como Hae Sung)', 'Dois Papas - Jonathan Pryce (como Papa Francisco)', 'Estranho Caminho - Lucas Limeira (como David)',
+                'Ringu - Hiroyuki Sanada (como Ryuji Takayama)', 'Vidas Passadas - John Magaro (como Hae Sung)', 'Estranho Caminho - Lucas Limeira (como David)',
                 'Ran - Tatsuya Nakadai (como Hidetora Ichimonji)', 'Psycho - Anthony Perkins (como Norman Bates)', 'La Haine - Vincent Cassel (como Vinz)',
                 'The Life Aquatic with Steve Zissou - Bill Murray (como Steve Zissou)', 'Drive My Car - Hidetoshi Nishijima (como Yusuke Kafuku)', 
                 'The Graduate - Dustin Hoffman (como Benjamin Braddock)', 'The Sacrifice - Erland Josephson (como Alexander)'
             ],
             'melhor-atriz': [
-                'Vidas Passadas - Greta Lee (como Nora)', 'Lady Bird - Saoirse Ronan (como Lady Bird McPherson)', 
+                'Ringu - Nanako Matsushima (como Reiko Asakawa)', 'Vidas Passadas - Greta Lee (como Nora)', 'Lady Bird - Saoirse Ronan (como Lady Bird McPherson)', 
                 'Psycho - Janet Leigh (como Marion Crane)', 'The Substance - Demi Moore (como Elisabeth)', 'The Substance - Margaret Qualley (como Sue)',
                 'The Life Aquatic with Steve Zissou - Cate Blanchett (como Jane Winslett-Richardson)', 'Drive My Car - Toko Miura (como Misaki Watari)',
                 'The Graduate - Anne Bancroft (como Mrs. Robinson)'
             ],
             'ator-coadjuvante': [
-                'Vidas Passadas - John Magaro (como Arthur)', 'Dois Papas - Anthony Hopkins (como Papa Bento XVI)', 'Estranho Caminho - Carlos Francisco (como Geraldo)',
+                'Vidas Passadas - John Magaro (como Arthur)', 'Estranho Caminho - Carlos Francisco (como Geraldo)',
                 'Lady Bird - Laurie Metcalf (como Marion McPherson)', 'Ran - Shinnosuke Ikehata (como Kyoami)', 'Psycho - John Gavin (como Sam)',
                 'La Haine - Hubert Koundé (como Hubert)', 'The Life Aquatic with Steve Zissou - Owen Wilson (como Ned Plimpton)', 
                 'Drive My Car - Reika Kirishima (como Takatsuki)', 'The Graduate - Katharine Ross (como Elaine Robinson)', 'The Sacrifice - Allan Edwall (como Otto)'
             ],
             'atriz-coadjuvante': [
-                'Lady Bird - Beanie Feldstein (como Julie Steffans)', 'Ran - Mieko Harada (como Lady Kaede)', 'Psycho - Vera Miles (como Lila Crane)',
+                'Ringu - Rie Ino (como Sadako)', 'Lady Bird - Beanie Feldstein (como Julie Steffans)', 'Ran - Mieko Harada (como Lady Kaede)', 'Psycho - Vera Miles (como Lila Crane)',
                 'The Life Aquatic with Steve Zissou - Cate Blanchett (como Jane Winsllet)', 'The Life Aquatic with Steve Zissou - Anjelica Huston (como Eleanor Zissou)',
                 'Drive My Car - Toko Miura (como Misaki Watari)', 'The Graduate - Katharine Ross (como Elaine Robinson)'
             ],
             'melhor-trilha-sonora': [
-                'Vidas Passadas', 'Dois Papas', 'Estranho Caminho', 'Lady Bird - Jon Brion', 'Ran - Toru Takemitsu', 'Psycho - Bernard Herrmann',
+                'Jojo Rabbit', 'Ringu', 'Pulse', 'Vidas Passadas', 'Lady Bird - Jon Brion', 'Ran - Toru Takemitsu', 'Psycho - Bernard Herrmann',
                 'The Substance', 'La Haine', 'The Life Aquatic with Steve Zissou - Mark Mothersbaugh', 'Drive My Car', 'The Graduate - Simon & Garfunkel', 
                 'The Sacrifice'
             ],
             'melhor-fotografia': [
-                'Vidas Passadas', 'Dois Papas', 'Estranho Caminho', 'Lady Bird - Sam Levy', 'Ran - Takao Saito', 'Psycho - John L. Russell',
+                'Jojo Rabbit', 'Ringu', 'Pulse', 'Vidas Passadas', 'Estranho Caminho', 'Lady Bird - Sam Levy', 'Ran - Takao Saito', 'Psycho - John L. Russell',
                 'The Substance', 'La Haine - Pierre Aïm', 'The Life Aquatic with Steve Zissou - Robert Yeoman', 'Drive My Car - Hidetoshi Shinomiya',
                 'The Graduate - Robert Surtees', 'The Sacrifice - Sven Nykvist'
             ],
             'melhor-montagem': [
-                'Vidas Passadas', 'Dois Papas', 'Estranho Caminho', 'Lady Bird - Nick Houy', 'Ran - Akira Kurosawa', 'Psycho - George Tomasini',
+                'Jojo Rabbit', 'Ringu', 'Pulse', 'Vidas Passadas', 'Estranho Caminho', 'Lady Bird - Nick Houy', 'Ran - Akira Kurosawa', 'Psycho - George Tomasini',
                 'The Substance', 'La Haine', 'The Life Aquatic with Steve Zissou', 'Drive My Car', 'The Graduate - Sam O\'Steen', 'The Sacrifice - Andrei Tarkovsky'
             ],
             'melhor-figurino': [
-                'Vidas Passadas', 'Dois Papas', 'Estranho Caminho', 'Lady Bird', 'Ran', 'Psycho', 'The Substance', 'La Haine', 
+                'Jojo Rabbit', 'Ringu', 'Pulse', 'Vidas Passadas', 'Estranho Caminho', 'Lady Bird', 'Ran', 'Psycho', 'The Substance', 'La Haine', 
                 'The Life Aquatic with Steve Zissou', 'Drive My Car', 'The Graduate', 'The Sacrifice'
             ],
             'melhor-design-producao': [
-                'Vidas Passadas', 'Dois Papas', 'Estranho Caminho', 'Lady Bird', 'Ran', 'Psycho', 'The Substance', 'La Haine', 
+                'Jojo Rabbit', 'Ringu', 'Pulse', 'Vidas Passadas', 'Estranho Caminho', 'Lady Bird', 'Ran', 'Psycho', 'The Substance', 'La Haine', 
                 'The Life Aquatic with Steve Zissou', 'Drive My Car', 'The Graduate', 'The Sacrifice'
             ],
             'melhor-efeito-visual': [
-                'Vidas Passadas', 'Dois Papas', 'Estranho Caminho', 'Lady Bird', 'Ran', 'Psycho', 'The Substance', 'La Haine',
+                'Jojo Rabbit', 'Ringu', 'Pulse', 'Vidas Passadas', 'Estranho Caminho', 'Lady Bird', 'Ran', 'Psycho', 'The Substance', 'La Haine',
                 'The Life Aquatic with Steve Zissou', 'Drive My Car', 'The Graduate', 'The Sacrifice'
             ],
             'melhor-som': [
-                'Vidas Passadas', 'Dois Papas', 'Estranho Caminho', 'Lady Bird', 'Ran', 'Psycho', 'The Substance', 'La Haine',
+                'Jojo Rabbit', 'Ringu', 'Pulse', 'Vidas Passadas', 'Estranho Caminho', 'Lady Bird', 'Ran', 'Psycho', 'The Substance', 'La Haine',
                 'The Life Aquatic with Steve Zissou', 'Drive My Car', 'The Graduate', 'The Sacrifice'
             ],
             'melhor-retro': [
-                'Ran', 'Psycho', 'The Graduate', 'The Sacrifice'
+                'Ringu', 'Ran', 'Psycho', 'The Graduate', 'The Sacrifice'
             ],
             'melhor-contribuicao': [
                 'Vampeta na capa de Lady Bird', 'Capistrano'
             ],
             'melhor-oriental': [
-                'Vidas Passadas', 'Ran', 'Drive My Car'
+                'Ringu', 'Pulse', 'Vidas Passadas', 'Ran', 'Drive My Car'
             ],
             'parece-alex': [
-                'Vidas Passadas', 'Dois Papas', 'Estranho Caminho', 'Lady Bird', 'Ran', 'Psycho', 'The Substance', 'La Haine', 
+                'Jojo Rabbit', 'Ringu', 'Pulse', 'Vidas Passadas', 'Estranho Caminho', 'Lady Bird', 'Ran', 'Psycho', 'The Substance', 'La Haine', 
                 'The Life Aquatic with Steve Zissou', 'Drive My Car', 'The Graduate', 'The Sacrifice'
             ],
             'poha-alex': [
-                'Vidas Passadas', 'Dois Papas', 'Estranho Caminho', 'Lady Bird', 'Ran', 'Psycho', 'The Substance', 'La Haine', 
+                'Jojo Rabbit', 'Ringu', 'Pulse', 'Vidas Passadas', 'Estranho Caminho', 'Lady Bird', 'Ran', 'Psycho', 'The Substance', 'La Haine', 
                 'The Life Aquatic with Steve Zissou', 'Drive My Car', 'The Graduate', 'The Sacrifice'
             ],
             'rola-bosta': [
-                'Vidas Passadas', 'Dois Papas', 'Estranho Caminho', 'Lady Bird', 'Ran', 'Psycho', 'The Substance', 'La Haine',
-                'The Life Aquatic with Steve Zissou', 'Drive My Car', 'The Graduate', 'The Sacrifice'
+                'Ringu', 'Pulse', 'Lady Bird', 'Psycho', 'The Substance', 'La Haine', 'The Graduate'
             ],
             'poha-beluga': [
-                'Vidas Passadas', 'Dois Papas', 'Estranho Caminho', 'Lady Bird', 'Ran', 'Psycho', 'The Substance', 'La Haine',
+                'Jojo Rabbit', 'Ringu', 'Pulse', 'Vidas Passadas', 'Estranho Caminho', 'Lady Bird', 'Ran', 'Psycho', 'The Substance', 'La Haine',
                 'The Life Aquatic with Steve Zissou', 'Drive My Car', 'The Graduate', 'The Sacrifice'
             ]
         };
